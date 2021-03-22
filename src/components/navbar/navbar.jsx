@@ -43,7 +43,6 @@ const NavBox = styled(motion.div)`
 `
 
 const MenuLink = styled(Link)`
-  font-family: Poppins, cursive;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.42);
   z-index: 99;
