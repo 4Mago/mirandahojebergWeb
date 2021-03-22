@@ -4,10 +4,7 @@ import { Route, Switch } from "react-router-dom"
 import About from "./pages/about.component"
 import Kontakt from "./pages/kontakt.component"
 import Home from "./pages/home.component"
-import ProjectExtended from "./pages/project-extended.component"
 import Sidebar from "./components/navbar/sidebar"
-import Gnistan from "./pages/Gnistan"
-import Osignat from "./pages/Osignat"
 import Forsbergs from "./pages/forsbergs"
 
 const Container = styled.div`
