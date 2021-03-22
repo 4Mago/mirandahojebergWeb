@@ -32,7 +32,7 @@ const About = () => {
         <HeaderText>{priskategori.title}</HeaderText>
         </LeftContainer>
         <RightContainer>
-          <HeaderTagline>Kom i kontakt med mig!</HeaderTagline>
+          <HeaderTagline>Kontakta mig:</HeaderTagline>
           <Text>{priskategori.valuta}</Text>
           <br />
           <Text>{priskategori.price}</Text>
