@@ -149,26 +149,6 @@ const HeaderTagline = styled(PortableText)`
   }
 `
 
-const HeroImage = styled.img`
-  height: auto;
-  width: 32rem;
-  border-radius: 28rem;
-  position: fixed;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0.4;
-  @media screen and (max-width: 1000px) {
-    width: 32rem;
-  }
-  @media screen and (max-width: 750px) {
-    width: 22rem;
-  }
-  @media screen and (max-width: 450px) {
-    width: 15rem;
-  }
-`
-
 const Text = styled.p`
   text-align: center;
   line-height: 24px;
