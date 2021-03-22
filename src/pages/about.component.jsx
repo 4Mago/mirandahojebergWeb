@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import imageUrlBuilder from "@sanity/image-url"
 import styled from "styled-components"
 import sanityClient from "../Client"
 import { motion } from "framer-motion"
@@ -10,7 +9,7 @@ const About = () => {
 
   useEffect(() => {
     const vemarjagQuery = `*[_type == "vemarjag"]{
-			title, tagline, description, image
+			title, tagline, description
 		  }`
     sanityClient.fetch(vemarjagQuery).then((vemarjag) => {
       const vemarjagArray = []
@@ -35,11 +34,6 @@ const About = () => {
           ? vemarjag.map((vemarjagItem, idx) => (
             <>
       <LeftContainer>
-      <HeroImage     
-          alt="hero image"
-          id="heroimage"
-          src={urlFor(vemarjagItem.image).url()}
-       />
         <HeaderText blocks={vemarjagItem.description} />
         <Text />        
       </LeftContainer>
@@ -58,10 +52,6 @@ const About = () => {
 
 export default About
 
-const builder = imageUrlBuilder(sanityClient)
-function urlFor(source) {
-  return builder.image(source)
-}
 
 const ContCont = styled.div`
   width: 100vw - 150px;
