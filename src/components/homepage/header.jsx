@@ -127,7 +127,8 @@ const HeaderTagline = styled.p`
 
 const HeroImage2 = styled.img`
   width: 550px;
-  height: 550px;
+  height: auto;
+  padding-top: 30px;
 
   @media screen and (max-width: 1000px) {
     width: 370px;

@@ -22,12 +22,9 @@ function App() {
       <Sidebar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/gnistan" component={Gnistan} />
-        <Route exact path="/osignat" component={Osignat} />
-        <Route path={"/project/:id"} component={ProjectExtended} />
-        <Route exact path={"/about"} component={About} />
+        <Route exact path={"/ommig"} component={About} />
         <Route exact path={"/kontakt"} component={Kontakt} />
-        <Route exact path={"/forsbergs"} component={Forsbergs} />
+        <Route exact path={"/arbeten"} component={Forsbergs} />
       </Switch>
     </Container>
   )

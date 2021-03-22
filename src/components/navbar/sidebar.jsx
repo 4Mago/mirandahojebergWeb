@@ -45,7 +45,6 @@ const NavBox = styled(motion.div)`
 `
 
 const MenuLink = styled(Link)`
-  font-family: Poppins, cursive;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.42);
   z-index: 99;
@@ -168,8 +167,6 @@ const Sidebar = () => {
               </MenuLink>
             ))
           : null}
-      <a href="mailto:jakobengwall@gmail.com"><SocialImage src="/mail.png"/></a>
-      <a href="tel:+46707102996"><SocialImage2 src="/phone.png"/></a>
       </NavBox>
 </Container>
     : 
