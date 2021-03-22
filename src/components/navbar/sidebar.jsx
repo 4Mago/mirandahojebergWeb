@@ -127,7 +127,7 @@ const Sidebar = () => {
       {side ?
     <Container id="navbar">
       <Link onClick={() => setSide(false)}>
-        <LogoBox className="App-logo2" alt="TEMC Logo" src="/snakeweb.gif" />
+        <LogoBox className="App-logo2" alt="TEMC Logo" src="/MH.png" />
       </Link>
       <NavBox
               exit={{ opacity: 0 }}
