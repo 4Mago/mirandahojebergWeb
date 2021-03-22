@@ -154,7 +154,7 @@ const Forsbergs = () => {
   return (
     forsbergs ?
     <ContCont>
-    <TitleImage src="/forsbergs.jpg"></TitleImage>
+    <TitleImage></TitleImage>
       {forsbergs ? (
     <Container
         exit={{ opacity: 0 }}

@@ -33,13 +33,10 @@ const About = () => {
         </LeftContainer>
         <RightContainer>
           <HeaderTagline>Kom i kontakt med mig!</HeaderTagline>
-          <Text><SocialImage src="/mail.png"/>{priskategori.valuta}</Text>
-          <Text><SocialImage2 src="/phone.png"/>{priskategori.price}</Text>
+          <Text>{priskategori.valuta}</Text>
           <br />
-          <HeaderTagline>Mer musik!</HeaderTagline>
-          <ASoundCloud href="https://soundcloud.com/osignat/sets/snaek-demoes/s-bwFuifGgd6R" target="_blank">
-          <SocialImage alt="TEMC Logo" src="/soundcloud.svg" />
-        </ASoundCloud>
+          <Text>{priskategori.price}</Text>
+          <br />
       </RightContainer>
       </Container>
     </ContCont>
@@ -73,34 +70,6 @@ const Container = styled(motion.div)`
   }
   @media screen and (max-width: 500px) {
     padding-left: 0;
-  }
-`
-
-
-const ASoundCloud = styled.a``
-
-const SocialImage = styled.img`
-  width: 65px;
-  height: auto;
-  padding: 15px;
-  padding-top: 0;
-  cursor: pointer;
-
-  &:hover {
-    transform: scale(1.2);
-    transition: 0.3s;
-  }
-`
-const SocialImage2 = styled.img`
-  width: 45px;
-  height: auto;
-  padding: 15px;
-  padding-top: 0;
-  cursor: pointer;
-
-  &:hover {
-    transform: scale(1.2);
-    transition: 0.3s;
   }
 `
 
@@ -224,6 +193,8 @@ display: flex;
 justify-content: center;
 align-items: center;
 margin: 0;
+font-size: 18px;
+
 
 @media screen and (min-width: 1400px) {
     font-size: 24px;
