@@ -1,60 +1,168 @@
 import { motion } from 'framer-motion'
 import React, { useState, useEffect } from 'react'
+import imageUrlBuilder from "@sanity/image-url"
 import styled from 'styled-components'
 import sanityClient from '../Client'
+
+const builder = imageUrlBuilder(sanityClient)
+function urlFor(source) {
+  return builder.image(source)
+}
 
 const ContCont = styled.div`
   background-color: black;
   height: auto;
+  padding-bottom: 15px;
 `
 
 const Container = styled(motion.div)`
   height: 100%;
   padding-left: 200px;
   padding-right: 140px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   grid-gap: 15px;
-  margin-top: 10vh;
-
+  padding-top: 16vh;
 
   @media screen and (min-width: 1400px) {
-  height: 140vh;
-  grid-gap: 140px;
+  grid-gap: 70px;
   }
   @media screen and (max-width: 500px) {
-  height: 140vh;
   padding-right: 15px;
+  padding-left: 15px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
   }
 `
 
-const ProjectCont = styled.div`
-  height: 350px;
-  width: 100%;
-  min-width: 280px;
-  background-color: #131313;
+const ProjectContPrio = styled.div`
+  width: 90%;
+  min-width: 300px;
+  min-height: 400px;
+  border: 1px solid white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  transition: 1s;
+  color: white;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+  box-sizing: border-box;
+  padding: 0 25px;
+  text-align: center;
+  position: relative;
+
+
+
+  &:hover {
+    box-shadow: 0 0 0 0 #fbfcfd, 0 0 1.5rem 0 #fbfcfd;
+    }
+
+  @media screen and (max-width: 950px) {
+    min-height: 350px;
+      padding-top: 0;
+      background-size: cover;
+      background-position: center;
+      height: 350px;
+
+      &:hover {
+    box-shadow: 0 0 0 0 #fbfcfd, 0 0 12px 0 #fbfcfd;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    height: 100%;
+    max-height: 350px;
+    min-height: 300px;
+    padding: 2px;
+    width: 70%;
+    margin-top: 1vh;  
+  }
+`
+
+const Button = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: #10632d;
+  padding: 5px 15px;
+  
+  &:hover {
+    cursor: pointer;
+  }
+`
+const Button1 = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 100px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: #10632d;
+  padding: 5px 15px;
+`
+
+const PrioContent = styled.div`
+  display: flex;
+  flex-flow: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+`
+
+const LinePrio = styled.div`
+  height: 1px;
+  width: 90%;
   padding: 0;
+  margin: 5px;
+  background-color: white;
+`
+
+const ProjectCont = styled.div`
+  height: 300px;
+  width: 300px;
+  min-width: 300px;
+  box-sizing: border-box;
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
+  padding-top: 60px;
   align-items: center;
   border: 1px solid white;
   transition: 1s;
   color: white;
   cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
 
   &:hover {
-    background-color: #8e8e8e;
-    color: black;
-  }
+    box-shadow: 0 0 0 0 #fbfcfd, 0 0 1.5rem 0 #fbfcfd;
+    }
 
+  @media screen and (max-width: 950px) {
+      padding-top: 0;
+      background-size: cover;
+      background-position: center;
+      height: 350px;
+
+      &:hover {
+    box-shadow: 0 0 0 0 #fbfcfd, 0 0 12px 0 #fbfcfd;
+    }
+  }
   @media screen and (max-width: 500px) {
     height: 100%;
     max-height: 280px;
-    min-height: 90%;
+    min-height: 250px;
     padding: 2px;
     width: 70%;
-    margin-top: 1vh;
+    margin-top: 1vh;  
   }
 `
 
@@ -62,12 +170,28 @@ const Title = styled.h2`
   height: 25px;
   text-align: left;
   padding: 0 5px;
+
+  @media screen and (max-width: 500px) {
+  font-size: 40px;
+  }
 `
+const Title3 = styled.h2`
+  text-align: center;
+  padding: 0 5px;
+
+  @media screen and (max-width: 500px) {
+  font-size: 35px;
+  }
+`
+
 const Title2 = styled.h2`
   height: 25px; 
   text-align: right;
   padding: 0 5px;
 
+  @media screen and (max-width: 500px) {
+    font-size: 40px;
+  }
 `
 
 
@@ -110,18 +234,30 @@ const Iframe = styled.iframe`
 const Desc = styled.p`
   width: 90%;
   justify-content: center;
+  max-width: 600px;
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
+    font-style: bold;
+  }
 `
 
 const Desc2 = styled.p`
   width: 90%;
   justify-content: center;
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
+    font-style: bold;
+  }
 `
 
-const TitleImage = styled.img`
-  width: 150px;
-  height: auto;
+const Img = styled.img`
+  height: 95%;
+  width: auto;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    height: auto;
+  }
 `
-
 
 
 const Forsbergs = () => {
@@ -129,11 +265,14 @@ const Forsbergs = () => {
   const [pdf1, setPdf1] = useState(false)
   const [pdf2, setPdf2] = useState(false)
   const [pdf3, setPdf3] = useState(false)
+  const [pdf4, setPdf4] = useState(false)
+  const [pdf5, setPdf5] = useState(false)
+  const [pdf6, setPdf6] = useState(false)
   const [forsbergs, setForsbergs] = useState('')
 
   useEffect(() => {
     const forsbergsQuery = `*[_type == "forsbergs"]{
-      title, tagline, description, image
+      title, tagline, description, logo
       }`
       if(!forsbergs.length) {
         console.log('fetching')
@@ -144,66 +283,116 @@ const Forsbergs = () => {
           })
           setForsbergs(forsbergsArray)
         })
-      
       }
-   
-    
     return
   }, [forsbergs.length])
  
   return (
     forsbergs ?
     <ContCont>
-    <TitleImage></TitleImage>
       {forsbergs ? (
     <Container
         exit={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         initial={{ opacity: 0 }}
       >
-            <ProjectCont onClick={() => setPdf(prevState => !prevState)}>
-              <Title>{forsbergs[0].title}</Title>
+            <ProjectContPrio onClick={() => setPdf6(prevState => !prevState)}
+              style={{ backgroundImage: `url(${urlFor(forsbergs[7].logo).quality(80).auto('format').url()})` }}
+            >
+              <Button>Hottest</Button>
+              <Button1>Newest</Button1>
+              <PrioContent>
+              <Title>{forsbergs[7].title}</Title>
+              <LinePrio />
+              <Desc>{forsbergs[7].tagline}</Desc>
+              </PrioContent>
+              {pdf6 ? (
+                <Modal>
+                  <ModalContent>
+                        <Iframe allowfullscreen src='/pdf/Budweiser.pdf' />
+                  </ModalContent>
+                </Modal>
+              ) : undefined}
+            </ProjectContPrio>
+            <ProjectCont onClick={() => setPdf(prevState => !prevState)}
+              style={{ backgroundImage: `url(${urlFor(forsbergs[4].logo).quality(80).auto('format').url()})` }}
+            >
+              <Title>{forsbergs[4].title}</Title>
               <Line />
-              <Desc>{forsbergs[0].tagline}</Desc>
+              <Desc>{forsbergs[4].tagline}</Desc>
               {pdf ? (
                 <Modal>
                   <ModalContent>
-                        <Iframe allowfullscreen src='/pdf/ta_språnget.pdf' />
+                        <Iframe allowfullscreen src='/pdf/MALVA.pdf' />
                   </ModalContent>
                 </Modal>
               ) : undefined}
             </ProjectCont>
-            <ProjectCont  onClick={() => setPdf1(prevState => (!prevState))}>
-              <Title2>{forsbergs[1].title}</Title2>
+            <ProjectCont  onClick={() => setPdf1(prevState => (!prevState))}
+              style={{ backgroundImage: `url(${urlFor(forsbergs[1].logo).quality(80).auto('format').url()})` }}
+            >
+              <Title>{forsbergs[1].title}</Title>
               <Line />
-              <Desc2>{forsbergs[1].tagline}</Desc2>
+              <Desc>{forsbergs[1].tagline}</Desc>
               {pdf1 ? (
                 <Modal>
                   <ModalContent>
-                    <Iframe allowfullscreen src='/pdf/Creative-task-portfolio.pdf' />                  </ModalContent>
-                </Modal>
-              ) : undefined}
-            </ProjectCont>
-            <ProjectCont  onClick={() => setPdf2(prevState => (!prevState))}>
-              <Title>{forsbergs[2].title}</Title>
-              <Line />
-              <Desc>{forsbergs[2].tagline}</Desc>
-              {pdf2 ? (
-                <Modal>
-                  <ModalContent>
-                        <Iframe allowfullscreen src='/pdf/babyblue_kampanj.pdf' />
+                    <Iframe allowfullscreen src='/pdf/ta_språnget.pdf' />
                   </ModalContent>
                 </Modal>
               ) : undefined}
             </ProjectCont>
-            <ProjectCont  onClick={() => setPdf3(prevState => (!prevState))}>
-              <Title>{forsbergs[3].title}</Title>
+            <ProjectCont  onClick={() => setPdf2(prevState => (!prevState))}
+              style={{ backgroundImage: `url(${urlFor(forsbergs[2].logo).quality(80).auto('format').url()})` }}
+            >
+              <Title2>{forsbergs[2].title}</Title2>
+              <Line />
+              <Desc2>{forsbergs[2].tagline}</Desc2>
+              {pdf2 ? (
+                <Modal>
+                  <ModalContent>
+                  <Iframe allowfullscreen src='/pdf/Creative-task-portfolio.pdf' />
+                  </ModalContent>
+                </Modal>
+              ) : undefined}
+            </ProjectCont>
+            <ProjectCont  onClick={() => setPdf3(prevState => (!prevState))}
+              style={{ backgroundImage: `url(${urlFor(forsbergs[3].logo).quality(80).auto('format').url()})` }}
+            >
+              <Title2>{forsbergs[3].title}</Title2>
               <Line />
               <Desc>{forsbergs[3].tagline}</Desc>
               {pdf3 ? (
                 <Modal>
                   <ModalContent>
-                        <Iframe allowfullscreen src='/pdf/Ett-steg-i-taget.pdf' />
+                  <Iframe allowfullscreen src='/pdf/babyblue_kampanj.pdf' />
+                  </ModalContent>
+                </Modal>
+              ) : undefined}
+            </ProjectCont>
+            <ProjectCont  onClick={() => setPdf4(prevState => (!prevState))}
+              style={{ backgroundImage: `url(${urlFor(forsbergs[5].logo).quality(80).auto('format').url()})` }}
+            >
+              <Title3>{forsbergs[5].title}</Title3>
+              <Line />
+              <Desc>{forsbergs[5].tagline}</Desc>
+              {pdf4 ? (
+                <Modal>
+                  <ModalContent>
+                  <Iframe allowfullscreen src='/pdf/Ett-steg-i-taget.pdf' />                  </ModalContent>
+                </Modal>
+              ) : undefined}
+            </ProjectCont>
+            <ProjectCont  onClick={() => setPdf5(prevState => (!prevState))}
+              style={{ backgroundImage: `url(${urlFor(forsbergs[6].logo).quality(80).auto('format').url()})` }}
+            >
+              <Title3>{forsbergs[6].title}</Title3>
+              <Line />
+              <Desc>{forsbergs[6].tagline}</Desc>
+              {pdf5 ? (
+                <Modal>
+                  <ModalContent>
+                        <Img allowfullscreen src={urlFor(forsbergs[0].logo).url()} />
                   </ModalContent>
                 </Modal>
               ) : undefined}
